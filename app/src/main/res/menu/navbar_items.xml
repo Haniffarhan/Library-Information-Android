@@ -16,4 +16,9 @@
             android:icon="@drawable/ic_arrow_forward_black_24dp"
             android:title="Forward"/>
 
+    <item
+            android:id="@+id/navigation_back_home"
+            android:icon="@drawable/ic_store_black_24dp"
+            android:title="Home"/>
+
 </menu>

@@ -1,5 +1,6 @@
 package com.haniffarhan.training.libraryinformationwebviewversion
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
@@ -33,6 +34,12 @@ class MainActivity : AppCompatActivity() {
                     // Go to forward history
                     webview.goForward()
                 }
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_back_home -> {
+                val intent = Intent(this, HomeActivity::class.java)
+                // start your next activity
+                startActivity(intent)
                 return@OnNavigationItemSelectedListener true
             }
         }
