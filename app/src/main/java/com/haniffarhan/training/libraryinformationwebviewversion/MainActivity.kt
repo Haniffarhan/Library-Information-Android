@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -14,12 +15,39 @@ class MainActivity : AppCompatActivity() {
 
     private val url = "http://172.16.10.12:8000/"
 
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_home -> {
+                if(webview.canGoBack()){
+                    // Go to back history
+                    webview.goBack()
+                }
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_dashboard -> {
+                webview.loadUrl(url)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_notifications -> {
+                if(webview.canGoForward()){
+                    // Go to forward history
+                    webview.goForward()
+                }
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
         // Get the web view settings instance
-        val settings = webview.settings;
+        val settings = webview.settings
 
         // Enable java script in web view
         settings.javaScriptEnabled = true
